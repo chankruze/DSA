@@ -19,7 +19,7 @@ Copyright (c) Geekofia 2021 and beyond
     printf("]\n")
 
 #define print_2d_arr(arr, rowsCount, columnsCount)  \
-    printf("\n\n[\n");                                  \
+    printf("\n[\n");                                  \
     for (size_t i = 0; i < rowsCount; ++i) {        \
         printf(" ");                     \
         for (size_t j = 0; j < columnsCount; ++j) { \
@@ -30,4 +30,4 @@ Copyright (c) Geekofia 2021 and beyond
         }                                           \
         printf("\n");       \
     }                                               \
-    printf("]\n\n")
+    printf("]\n")
