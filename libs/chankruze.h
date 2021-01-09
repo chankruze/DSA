@@ -19,15 +19,16 @@ Copyright (c) Geekofia 2021 and beyond
     printf("]\n")
 
 #define print_2d_arr(arr, rowsCount, columnsCount)  \
-    printf("\n[\n");                                  \
+    printf("\n[\n");                                \
     for (size_t i = 0; i < rowsCount; ++i) {        \
-        printf(" ");                     \
+        printf(" ");                                \
         for (size_t j = 0; j < columnsCount; ++j) { \
             if (columnsCount - 1 == j)              \
                 printf("%d", arr[i][j]);            \
             else                                    \
                 printf("%d, ", arr[i][j]);          \
         }                                           \
-        printf("\n");       \
+        printf("\n");                               \
     }                                               \
     printf("]\n")
+
