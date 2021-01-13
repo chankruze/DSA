@@ -23,11 +23,12 @@ void printNodeWithIndex(struct Node* nodePtr, size_t index) {
 void printLinkedList(struct Node* headerNode) {
     size_t index = 0;
 
+    printf("\n[LIST]");
     while (headerNode->link != NULL) {
         // header node have no data to print
         headerNode = headerNode->link;
         // print node data
-        printf("%d ", headerNode->data);
+        printf(" %d", headerNode->data);
     }
     printf("\n");
 }
@@ -118,4 +119,79 @@ void addNodeAtNthPosition(struct Node* headerNode, size_t n, int data) {
 
     // 3. fix nth node's link to point to new node's address
     headerNode->link = newNode;
+}
+
+void deleteNodeAtTheBeginning(struct Node* headerNode) {
+    /**
+     * Logic
+     *
+     * 1. store 1st node's adress in temp node
+     * 2. update header node's link to the temp node's link
+     * 3. free (deallocate) memory of deleted node
+     *
+     */
+
+    // 1. store 1st node's adress in temp node
+    struct Node* temp = headerNode->link;
+
+    // 2. update header node's link to the temp node's link
+    headerNode->link = temp->link;
+
+    // 3. free (deallocate) memory of deleted node
+    printf("\n[INFO] Deleted %d from beginning\n", temp->data);
+    free(temp);
+}
+
+void deleteNodeAtTheEnd(struct Node* headerNode) {
+    /**
+     * Logic
+     *
+     * 1. traverse the list to the end while keeping track of previous node
+     * 2. update 2nd last node's link to NULL
+     * 3. free (deallocate) memory of deleted node
+     *
+     */
+
+    // 1. traverse the list to the end while keeping track of previous node
+    struct Node* prevNode = headerNode;
+    while (headerNode->link != NULL) {
+        // keep track of previous node
+        prevNode = headerNode;
+        // update current node to next node
+        headerNode = headerNode->link;
+    }
+
+    // 2. update 2nd last node's link to NULL
+    prevNode->link = NULL;
+
+    // 3. free (deallocate) memory of deleted node
+    printf("\n[INFO] Deleted %d from end\n", headerNode->data);
+    free(headerNode);
+}
+
+void deleteNodeAtNthPosition(struct Node* headerNode, size_t n) {
+    /**
+     * Logic
+     *
+     * 1. traverse the list to the while keeping track of previous node
+     * 2. update (n-1)th node's link to NULL
+     * 3. free (deallocate) memory of deleted node
+     *
+     */
+
+    // 1. traverse the list to the end while keeping track of previous node
+    struct Node* prevNode = headerNode;
+    for (size_t i = 0; i < n; ++i) {
+        // keep track of previous node
+        prevNode = headerNode;
+        // update current node to next node
+        headerNode = headerNode->link;
+    }
+
+    // 2. update (n-1)th node's link to NULL
+    prevNode->link = headerNode->link;
+
+    // 3. free (deallocate) memory of deleted node
+    printf("\n[INFO] Deleted %d from %ldth position\n", headerNode->data, n);
+    free(headerNode);
 }

@@ -31,8 +31,19 @@ int main(int argc, char const* argv[]) {
     // print linked list elements
     printLinkedList(headerNode);
 
-    // print linked list detailed
-    printLinkedListDetailed(headerNode);
+    // delete a node from the beginning
+    deleteNodeAtTheBeginning(headerNode);
+    printLinkedList(headerNode);
 
+    // delete a node form the end
+    deleteNodeAtTheEnd(headerNode);
+    printLinkedList(headerNode);
+
+    // delete a node from nth position
+    deleteNodeAtNthPosition(headerNode, 4);
+    printLinkedList(headerNode);
+
+    // print linked list detailed
+    // printLinkedListDetailed(headerNode);
     return 0;
 }
