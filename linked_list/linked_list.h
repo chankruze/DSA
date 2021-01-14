@@ -17,13 +17,19 @@ void printNodeWithIndex(struct Node* nodePtr, size_t index) {
     printf("\n");
     printf("Position: %ld\n", index);
     printf("Data: %d\n", nodePtr->data);
-    printf("Link: %p\n", nodePtr->link);
+    nodePtr->link == NULL ? printf("Link: NULL\n")
+                          : printf("Link: %p\n", nodePtr->link);
 }
 
 void printLinkedList(struct Node* headerNode) {
     size_t index = 0;
 
-    printf("\n[LIST]");
+    printf("[LIST]");
+    if (headerNode->link == NULL) {
+        printf(" List is empty.\n");
+        return;
+    }
+
     while (headerNode->link != NULL) {
         // header node have no data to print
         headerNode = headerNode->link;
@@ -36,12 +42,34 @@ void printLinkedList(struct Node* headerNode) {
 void printLinkedListDetailed(struct Node* headerNode) {
     size_t index = 0;
 
+    printf("\n------------------------\n");
+    printf("| Detailed Linked List |\n");
+    printf("------------------------");
+    if (headerNode->link == NULL) {
+        printf("\nList is empty.\n");
+        printf("------------------------\n");
+        return;
+    }
+
     while (headerNode->link != NULL) {
         // header node have no data to print
         headerNode = headerNode->link;
         // print node data
         printNodeWithIndex(headerNode, ++index);
     }
+    printf("------------------------\n\n");
+}
+
+int isEmptyList(struct Node* headerNode) { return headerNode->link == NULL; }
+
+size_t countNodes(struct Node* headerNode) {
+    struct Node* temp = headerNode;
+    size_t nodes = 0;
+    while (temp->link != NULL) {
+        temp = temp->link;
+        ++nodes;
+    }
+    return nodes;
 }
 
 void addNodeAtTheEnd(struct Node* headerNode, int data) {
@@ -131,6 +159,12 @@ void deleteNodeAtTheBeginning(struct Node* headerNode) {
      *
      */
 
+    // is empty list -> return
+    if (isEmptyList(headerNode)) {
+        printf("[ERROR] List is empty. Can't delete the first node\n");
+        return;
+    }
+
     // 1. store 1st node's adress in temp node
     struct Node* temp = headerNode->link;
 
@@ -138,7 +172,7 @@ void deleteNodeAtTheBeginning(struct Node* headerNode) {
     headerNode->link = temp->link;
 
     // 3. free (deallocate) memory of deleted node
-    printf("\n[INFO] Deleted %d from beginning\n", temp->data);
+    printf("[INFO] Deleted %d from the beginning\n", temp->data);
     free(temp);
 }
 
@@ -151,6 +185,12 @@ void deleteNodeAtTheEnd(struct Node* headerNode) {
      * 3. free (deallocate) memory of deleted node
      *
      */
+
+    // is empty list -> return
+    if (isEmptyList(headerNode)) {
+        printf("[ERROR] List is empty. Can't delete the last node\n");
+        return;
+    }
 
     // 1. traverse the list to the end while keeping track of previous node
     struct Node* prevNode = headerNode;
@@ -165,7 +205,7 @@ void deleteNodeAtTheEnd(struct Node* headerNode) {
     prevNode->link = NULL;
 
     // 3. free (deallocate) memory of deleted node
-    printf("\n[INFO] Deleted %d from end\n", headerNode->data);
+    printf("[INFO] Deleted %d from the end\n", headerNode->data);
     free(headerNode);
 }
 
@@ -174,10 +214,25 @@ void deleteNodeAtNthPosition(struct Node* headerNode, size_t n) {
      * Logic
      *
      * 1. traverse the list to the while keeping track of previous node
-     * 2. update (n-1)th node's link to NULL
+     * 2. update (n-1)th node's link to nth's link
      * 3. free (deallocate) memory of deleted node
      *
      */
+
+    // is empty list -> return
+    if (isEmptyList(headerNode)) {
+        printf("[ERROR] List is empty. Can't delete %ldth position\n", n);
+        return;
+    }
+
+    // check if nth element is presen
+    size_t totalNodes = countNodes(headerNode);
+
+    if (n > totalNodes) {
+        printf("[ERROR] Total %ld nodes present. %ldth node not present.\n",
+               totalNodes, n);
+        return;
+    }
 
     // 1. traverse the list to the end while keeping track of previous node
     struct Node* prevNode = headerNode;
@@ -188,10 +243,10 @@ void deleteNodeAtNthPosition(struct Node* headerNode, size_t n) {
         headerNode = headerNode->link;
     }
 
-    // 2. update (n-1)th node's link to NULL
+    // 2. update (n-1)th node's link to nth's link
     prevNode->link = headerNode->link;
 
     // 3. free (deallocate) memory of deleted node
-    printf("\n[INFO] Deleted %d from %ldth position\n", headerNode->data, n);
+    printf("[INFO] Deleted %d from %ldth position\n", headerNode->data, n);
     free(headerNode);
 }
