@@ -8,69 +8,79 @@ Copyright (c) Geekofia 2021 and beyond
 #include "linked_list.h"
 
 int main(int argc, char const* argv[]) {
-    // initialize a linked list
-    struct Node* headerNode = (struct Node*)malloc(sizeof(struct Node));
-    // empty list
-    headerNode->link = NULL;
+    // init head as NULL (empty linked list)
+    struct Node* head = NULL;
 
+    // insertion tests
+    printLinkedList(head);
     // add 5 nodes to linked list's end
     for (int i = 0; i < 5; ++i) {
-        addNodeAtTheEnd(headerNode, (i * 10) + 10);
+        addNodeAtTheEnd(&head, (i * 10) + 10);
+        // printf("head = %p", head);
     }
+    printLinkedList(head);
+    // insert a node at the end
+    addNodeAtTheEnd(&head, 100);
+    printLinkedList(head);
+    // insert a node at the beginning
+    addNodeAtTheBeginning(&head, 1);
+    printLinkedList(head);
+    // insert a node at nth position
+    addNodeAtNthPosition(&head, 1, 69);
+    printLinkedList(head);
+    // insert a node at nth position
+    addNodeAtNthPosition(&head, 2, 70);
+    printLinkedList(head);
+    // insert a node at nth position
+    addNodeAtNthPosition(&head, 1, 96);
+    printLinkedList(head);
+    // insert a node at nth position
+    addNodeAtNthPosition(&head, countNodes(head), 69);
+    printLinkedList(head);
 
-    // add 5 nodes to linked list's beginning
-    for (int i = 0; i < 5; ++i) {
-        addNodeAtTheBeginning(headerNode, (i * 10) + 1);
-    }
-
-    addNodeAtNthPosition(headerNode, 7, 69);
-    printLinkedList(headerNode);
-    // print linked list elements in detail
-    printLinkedListDetailed(headerNode);
-
+    // deletion tests
     // delete a node from the beginning
-    deleteNodeAtTheBeginning(headerNode);
-    printLinkedList(headerNode);
+    deleteNodeAtTheBeginning(&head);
+    printLinkedList(head);
     // delete a node form the end
-    deleteNodeAtTheEnd(headerNode);
-    printLinkedList(headerNode);
+    deleteNodeAtTheEnd(&head);
+    printLinkedList(head);
     // delete a node from nth position
-    deleteNodeAtNthPosition(headerNode, 4);
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 1);
-    printLinkedList(headerNode);
+    deleteNodeAtNthPosition(&head, 4);
+    printLinkedList(head);
+    deleteNodeAtNthPosition(&head, 1);
+    printLinkedList(head);
+    deleteNodeAtNthPosition(&head, 7);
+    printLinkedList(head);
     // delete a node by it's value
-    deleteNodeWithValue(headerNode, 69);
-    printLinkedList(headerNode);
+    deleteNodeWithValue(&head, 50);
+    printLinkedList(head);
 
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 1);
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 1);
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 1);
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 1);
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 1);
-    printLinkedList(headerNode);
-    deleteNodeAtNthPosition(headerNode, 5);
-    printLinkedList(headerNode);
+    // reverse linked list
+    printf("[ORIGINAL] ");
+    printLinkedList(head);
+    reverseLinkedList(&head);
+    printf("[REVERSED] ");
+    printLinkedList(head);
+    reverseLinkedList(&head);
+    printf("[REVERSED] ");
+    printLinkedList(head);
+
     //  checking deleting methods when list is empty.
-    deleteNodeAtNthPosition(headerNode, 16);
-    deleteNodeWithValue(headerNode, 40);
-    deleteNodeAtNthPosition(headerNode, 5);
-    deleteNodeAtNthPosition(headerNode, 99);
-    deleteNodeAtTheBeginning(headerNode);
-    deleteNodeAtTheBeginning(headerNode);
-    deleteNodeAtTheBeginning(headerNode);
-    deleteNodeAtTheBeginning(headerNode);
-    deleteNodeAtTheEnd(headerNode);
-    deleteNodeAtTheEnd(headerNode);
-    deleteNodeAtTheEnd(headerNode);
-    deleteNodeAtTheEnd(headerNode);
+    deleteNodeAtNthPosition(&head, 16);
+    deleteNodeWithValue(&head, 40);
+    deleteNodeAtNthPosition(&head, 5);
+    deleteNodeAtNthPosition(&head, 99);
+    deleteNodeAtTheBeginning(&head);
+    deleteNodeAtTheBeginning(&head);
+    deleteNodeAtTheBeginning(&head);
+    deleteNodeAtTheBeginning(&head);
+    deleteNodeAtTheEnd(&head);
+    deleteNodeAtTheEnd(&head);
+    deleteNodeAtTheEnd(&head);
+    deleteNodeAtTheEnd(&head);
 
-    // print linked list detailed
-    printLinkedListDetailed(headerNode);
+    // print detailed list
+    printLinkedListDetailed(head);
     return 0;
 }
