@@ -250,3 +250,34 @@ void deleteNodeAtNthPosition(struct Node* headerNode, size_t n) {
     printf("[INFO] Deleted %d from %ldth position\n", headerNode->data, n);
     free(headerNode);
 }
+
+void deleteNodeWithValue(struct Node* headerNode, int value) {
+    /**
+     * Logic
+     *
+     * 1. traverse the list to find the value's position
+     * 2. delete the node at that position
+     * 3. free (deallocate) memory of deleted node
+     *
+     */
+
+    // is empty list -> return
+    if (isEmptyList(headerNode)) {
+        printf("[ERROR] List is empty. Can't delete node with value %d\n",
+               value);
+        return;
+    }
+
+    // check if element with given value is present
+    struct Node* temp = headerNode;
+    size_t index = 0;
+    int isValueFound = 0;
+
+    while (temp->link != NULL && !isValueFound) {
+        temp = temp->link;
+        isValueFound = (temp->data == value);
+        ++index;
+    }
+
+    deleteNodeAtNthPosition(headerNode, index);
+}

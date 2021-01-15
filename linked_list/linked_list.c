@@ -13,36 +13,36 @@ int main(int argc, char const* argv[]) {
     // empty list
     headerNode->link = NULL;
 
-    // add 5 nodes to linked list
+    // add 5 nodes to linked list's end
     for (int i = 0; i < 5; ++i) {
         addNodeAtTheEnd(headerNode, (i * 10) + 10);
     }
 
-    // add 5 nodes to linked list
+    // add 5 nodes to linked list's beginning
     for (int i = 0; i < 5; ++i) {
         addNodeAtTheBeginning(headerNode, (i * 10) + 1);
     }
 
-    // print linked list elements
-    printLinkedList(headerNode);
-
     addNodeAtNthPosition(headerNode, 7, 69);
-    // print linked list elements
     printLinkedList(headerNode);
+    // print linked list elements in detail
     printLinkedListDetailed(headerNode);
 
     // delete a node from the beginning
     deleteNodeAtTheBeginning(headerNode);
     printLinkedList(headerNode);
-
     // delete a node form the end
     deleteNodeAtTheEnd(headerNode);
     printLinkedList(headerNode);
-
     // delete a node from nth position
     deleteNodeAtNthPosition(headerNode, 4);
     printLinkedList(headerNode);
     deleteNodeAtNthPosition(headerNode, 1);
+    printLinkedList(headerNode);
+    // delete a node by it's value
+    deleteNodeWithValue(headerNode, 69);
+    printLinkedList(headerNode);
+
     printLinkedList(headerNode);
     deleteNodeAtNthPosition(headerNode, 1);
     printLinkedList(headerNode);
@@ -58,7 +58,7 @@ int main(int argc, char const* argv[]) {
     printLinkedList(headerNode);
     //  checking deleting methods when list is empty.
     deleteNodeAtNthPosition(headerNode, 16);
-    deleteNodeAtNthPosition(headerNode, 1);
+    deleteNodeWithValue(headerNode, 40);
     deleteNodeAtNthPosition(headerNode, 5);
     deleteNodeAtNthPosition(headerNode, 99);
     deleteNodeAtTheBeginning(headerNode);
