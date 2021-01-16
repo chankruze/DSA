@@ -7,22 +7,13 @@ Copyright (c) Geekofia 2021 and beyond
 
 #include "selection_sort.h"
 
-void print_arr(int* arr, size_t length) {
-    for (size_t i = 0; i < length;) {
-        printf("%d", arr[i]);
-        if (++i == length)
-            printf("\n");
-        else
-            printf(" ");
-    }
-}
-
 int main(int argc, char const* argv[]) {
     // arrays
     int arr1[] = {3, 7, 8, 1, 0, 4, 2};
     size_t arr1_len = (&arr1)[1] - arr1;
 
     // selection sort
+    printf("---- SELECTION SORT ----\n");
     printf("[ORIGINAL] ");
     print_arr(arr1, arr1_len);
     selection_sort(arr1, arr1_len);
